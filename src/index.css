@@ -44,8 +44,12 @@ body {
   background-color: rgb(237, 139, 28);
 }
 
-.cell.visited {
+.cell.visitedColor {
   background-color: aquamarine;
+}
+
+.cell.path {
+  background-color: yellow;
 }
 
 .btn {
