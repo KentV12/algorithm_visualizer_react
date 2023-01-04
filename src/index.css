@@ -1,13 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Open Sans', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  max-width: 1000px;
+  border: 2px solid steelblue;
+  margin: 30px auto;
+  padding: 30px;
+  text-align: center;
+}
+
+.gridContainer {
+  /* font-size 0 or there will be space between rows */
+  /* outline should be 2px to match because grid 1px will match with the next grid 1px */
+  /* outline is now 1px because of border */
+  max-width: 500px;
+  height: 500px;
+  outline: 1px solid black;
+  margin: auto;
+  font-size: 0;
+}
+
+.cell {
+  /* outline better than border here or we will need to adjust width minus border px */
+  /* border is needed since background color will overlap with outline, thus no outline */
+  /* outline: 1px solid black; */
+  border: 1px solid black;
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.cell.start {
+  background-color: cyan;
+}
+
+.cell.end {
+  background-color: rgb(237, 139, 28);
+}
+
+.cell.visited {
+  background-color: aquamarine;
+}
+
+.btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
 }
