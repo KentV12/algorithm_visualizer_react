@@ -1,10 +1,11 @@
+// remember: these values will persist through application
 let visitedOrder = [];
 let shortestPath = [];
 let found = false;
 
 let endCell = null;
 
-export function BFS(grid, start, end) {
+export function BFS(grid, start, end, rows, cols) {
   endCell = end;
 
   console.log(
@@ -18,9 +19,10 @@ export function BFS(grid, start, end) {
       end[1]
   );
 
-  // implement algorithm and get visited order
-  // we know grid size, where to start and end
-  // keep track of visited order and parents of the current node
+  // reset all values
+  visitedOrder = [];
+  shortestPath = [];
+  found = false;
 
   let queue = [];
   let neighbors = [];
@@ -33,7 +35,7 @@ export function BFS(grid, start, end) {
 
   do {
     cur = queue.shift();
-    neighbors = getNeighbors(cur);
+    neighbors = getNeighbors(cur, rows, cols);
     console.log("neighbors: " + neighbors);
 
     shortestPath[[start[0], start[1]]] = "start";
@@ -58,11 +60,10 @@ export function BFS(grid, start, end) {
     }
   } while (queue.length > 0 && found === false);
 
-  animateVisitedOrder();
-  if (found) animateShortestPath();
+  animateBothPath();
 }
 
-function getNeighbors(cell) {
+function getNeighbors(cell, rows, cols) {
   // cell contains row, col at index 0, 1 respectively
   let neighbors = [];
   console.log("getting neighbors of " + cell[0] + "-" + cell[1]);
@@ -73,7 +74,7 @@ function getNeighbors(cell) {
   const bottom = cell[0] + 1;
 
   // check right
-  if (right <= 9) {
+  if (right < cols) {
     if (
       document.getElementById(cell[0] + "-" + right).className === "cell" ||
       document.getElementById(cell[0] + "-" + right).className === "cell end"
@@ -97,7 +98,7 @@ function getNeighbors(cell) {
       neighbors.push([cell[0], left]);
   }
   // check bottom
-  if (bottom <= 9) {
+  if (bottom < rows) {
     if (
       document.getElementById(bottom + "-" + cell[1]).className === "cell" ||
       document.getElementById(bottom + "-" + cell[1]).className === "cell end"
@@ -108,27 +109,26 @@ function getNeighbors(cell) {
   return neighbors;
 }
 
-function animateVisitedOrder() {
+// setTimeout does not pause the application. It will run through the code as normal but those with setTimeout will execute after specified time.
+// easier to animate both path due to how setTimeout works. We can keep track of when to start via count
+function animateBothPath() {
+  const timePerGrid = 25;
   let count = 0;
 
   while (visitedOrder.length > 0) {
     let cell = visitedOrder.shift();
 
     if (!isEnd(cell)) {
+      // if not the last cell
       setTimeout(() => {
         document.getElementById(cell[0] + "-" + cell[1]).className =
-          "cell visitedColor";
-      }, 20 * count); // setTimeout does not pause the application.
-      // It will run through the code as normal but those with setTimeout will stay. Multiplied by count means every 10ms this will be called
+          "cell visitedColor"; // change to visited
+      }, timePerGrid * count); // Multiplied by count means every 10ms this will be called
       count++;
     }
   }
-}
 
-// return shortest path by tracing from last cell
-function animateShortestPath() {
   let cur = shortestPath[[endCell[0], endCell[1]]];
-
   let pathArray = [];
 
   // while the parent cell of current cell is not the start
@@ -137,16 +137,63 @@ function animateShortestPath() {
     cur = shortestPath[[cur[0], cur[1]]];
   }
 
-  let count = 0;
-  while (pathArray.length > 0) {
-    let cur = pathArray.shift();
+  // if end cell is found
+  if (found) {
     setTimeout(() => {
-      document.getElementById(cur[0] + "-" + cur[1]).className = "cell path";
-    }, 4000 + 50 * count);
-    count++;
+      // wait 1s
+      let count = 0;
+      while (pathArray.length > 0) {
+        let cur = pathArray.shift();
+        setTimeout(() => {
+          document.getElementById(cur[0] + "-" + cur[1]).className =
+            "cell path";
+        }, timePerGrid * 2 * count); // display shortest path in half the time of visiting cells
+        count++;
+      }
+    }, timePerGrid * count + 1000);
   }
 }
 
+// function animateVisitedOrder() {
+//   let count = 0;
+
+//   while (visitedOrder.length > 0) {
+//     let cell = visitedOrder.shift();
+
+//     if (!isEnd(cell)) {
+//       setTimeout(() => {
+//         document.getElementById(cell[0] + "-" + cell[1]).className =
+//           "cell visitedColor";
+//       }, 20 * count); // setTimeout does not pause the application.
+//       // It will run through the code as normal but those with setTimeout will stay. Multiplied by count means every 10ms this will be called
+//       count++;
+//     }
+//   }
+// }
+
+// return shortest path by tracing from last cell
+// function animateShortestPath() {
+//   let cur = shortestPath[[endCell[0], endCell[1]]];
+
+//   let pathArray = [];
+
+//   // while the parent cell of current cell is not the start
+//   while (shortestPath[[cur[0], cur[1]]] !== "start") {
+//     pathArray.push([cur[0], cur[1]]);
+//     cur = shortestPath[[cur[0], cur[1]]];
+//   }
+
+//   let count = 0;
+//   while (pathArray.length > 0) {
+//     let cur = pathArray.shift();
+//     setTimeout(() => {
+//       document.getElementById(cur[0] + "-" + cur[1]).className = "cell path";
+//     }, 4000 + 50 * count);
+//     count++;
+//   }
+// }
+
+// return if cell is the end cell
 function isEnd(cell) {
   let isEnd = false;
 

@@ -16,10 +16,8 @@ body {
   /* font-size 0 or there will be space between rows */
   /* outline should be 2px to match because grid 1px will match with the next grid 1px */
   /* outline is now 1px because of border */
-  max-width: 500px;
-  height: 500px;
-  outline: 1px solid black;
-  margin: auto;
+  /* outline: 1px solid black; */
+  margin: 35px auto;
   font-size: 0;
 }
 
