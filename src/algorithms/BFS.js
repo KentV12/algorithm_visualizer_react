@@ -73,6 +73,7 @@ function getNeighbors(cell, rows, cols) {
   const left = cell[1] - 1;
   const bottom = cell[0] + 1;
 
+  // check if adjacent cell is a traversable cell
   // check right
   if (right < cols) {
     if (
@@ -140,7 +141,6 @@ function animateBothPath() {
   // if end cell is found
   if (found) {
     setTimeout(() => {
-      // wait 1s
       let count = 0;
       while (pathArray.length > 0) {
         let cur = pathArray.shift();
@@ -153,45 +153,6 @@ function animateBothPath() {
     }, timePerGrid * count + 1000);
   }
 }
-
-// function animateVisitedOrder() {
-//   let count = 0;
-
-//   while (visitedOrder.length > 0) {
-//     let cell = visitedOrder.shift();
-
-//     if (!isEnd(cell)) {
-//       setTimeout(() => {
-//         document.getElementById(cell[0] + "-" + cell[1]).className =
-//           "cell visitedColor";
-//       }, 20 * count); // setTimeout does not pause the application.
-//       // It will run through the code as normal but those with setTimeout will stay. Multiplied by count means every 10ms this will be called
-//       count++;
-//     }
-//   }
-// }
-
-// return shortest path by tracing from last cell
-// function animateShortestPath() {
-//   let cur = shortestPath[[endCell[0], endCell[1]]];
-
-//   let pathArray = [];
-
-//   // while the parent cell of current cell is not the start
-//   while (shortestPath[[cur[0], cur[1]]] !== "start") {
-//     pathArray.push([cur[0], cur[1]]);
-//     cur = shortestPath[[cur[0], cur[1]]];
-//   }
-
-//   let count = 0;
-//   while (pathArray.length > 0) {
-//     let cur = pathArray.shift();
-//     setTimeout(() => {
-//       document.getElementById(cur[0] + "-" + cur[1]).className = "cell path";
-//     }, 4000 + 50 * count);
-//     count++;
-//   }
-// }
 
 // return if cell is the end cell
 function isEnd(cell) {
