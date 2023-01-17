@@ -4,8 +4,23 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.form-control {
+  /* display: block; */
+  /* font-size: 30px; */
+  /* position: relative; */
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+  /* justify-content: center; */
+  padding-left: 43%;
+  text-align: left;
+}
+
 .container {
-  max-width: 1000px;
+  max-width: max-content;
   /* border: 2px solid steelblue; */
   margin: 30px auto;
   padding: 30px;

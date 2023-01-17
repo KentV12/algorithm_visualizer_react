@@ -2,15 +2,17 @@
 import { useState } from "react";
 import Cell from "./components/Cell";
 import { BFS } from "./algorithms/BFS";
+import { DFS } from "./algorithms/DFS";
 
 function App() {
   const [wall, setWall] = useState(false);
+  const [curAlgo, setAlgo] = useState("");
 
   const grid = [];
-  const rows = 12;
-  const cols = 12;
-  const start = [3, 3];
-  const end = [8, 8];
+  const rows = 13;
+  const cols = 30;
+  const start = [6, 3];
+  const end = [6, 26];
 
   // reset grid
   const clearGrid = () => {
@@ -41,6 +43,7 @@ function App() {
         document.getElementById(id).className = "cell wall";
   };
 
+  // create grid
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       const isStart = row === start[0] && col === start[1];
@@ -59,24 +62,56 @@ function App() {
     }
   }
 
+  // choose algorithm
+  const selectAlgorithm = (selectedAlgo) => {
+    console.log("selected algorithm: " + selectedAlgo);
+    setAlgo(selectedAlgo);
+  };
+
+  const performAlgorithm = () => {
+    if (curAlgo === "BFS") BFS(grid, start, end, rows, cols);
+    else if (curAlgo === "DFS") DFS();
+  };
+
   return (
     <div className="container">
       <h1>Pathfinding Algorithm Visualizer</h1>
-      <h3>Create a grid to visualize</h3>
-      <h3>Clear it to try again</h3>
-      <h4>Current Algorithm Supported: Breadth-First Search</h4>
-
       <h4>
-        Adding Wall: Click to enable wall and Hover to add. Click again to Stop.
+        Current Algorithm Supported:{" "}
+        <span style={{ color: "orange" }}>Breadth-First Search</span>
       </h4>
 
-      <button onClick={() => BFS(grid, start, end, rows, cols)} className="btn">
+      <label className="form-control">
+        <input
+          type={"radio"}
+          name="algo"
+          value={"BFS"}
+          onChange={(e) => selectAlgorithm(e.target.value)}
+        />
+        BFS
+      </label>
+
+      <label className="form-control">
+        <input
+          type={"radio"}
+          name="algo"
+          value={"DFS"}
+          onChange={(e) => selectAlgorithm(e.target.value)}
+        />
+        DFS
+      </label>
+
+      <h4>
+        Adding <span style={{ color: "brown" }}>Wall</span>: Click to enable
+        wall and Hover to add. Click again to Stop.
+      </h4>
+
+      <button onClick={() => performAlgorithm()} className="btn">
         Visualize
       </button>
       <button className="btn" onClick={() => clearGrid()}>
         Clear Grid
       </button>
-
       <div
         className="gridContainer"
         id="grid-container"

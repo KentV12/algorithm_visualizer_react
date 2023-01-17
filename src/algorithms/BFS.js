@@ -8,17 +8,6 @@ let endCell = null;
 export function BFS(grid, start, end, rows, cols) {
   endCell = end;
 
-  console.log(
-    "we need to go from " +
-      start[0] +
-      "-" +
-      start[1] +
-      " to " +
-      end[0] +
-      "-" +
-      end[1]
-  );
-
   // reset all values
   visitedOrder = [];
   shortestPath = [];
@@ -30,13 +19,9 @@ export function BFS(grid, start, end, rows, cols) {
 
   queue.push([start[0], start[1]]);
 
-  console.log(end[0]);
-  console.log(end[1]);
-
   do {
     cur = queue.shift();
     neighbors = getNeighbors(cur, rows, cols);
-    console.log("neighbors: " + neighbors);
 
     shortestPath[[start[0], start[1]]] = "start";
 
@@ -66,7 +51,6 @@ export function BFS(grid, start, end, rows, cols) {
 function getNeighbors(cell, rows, cols) {
   // cell contains row, col at index 0, 1 respectively
   let neighbors = [];
-  console.log("getting neighbors of " + cell[0] + "-" + cell[1]);
 
   const right = cell[1] + 1;
   const top = cell[0] - 1;
