@@ -20,10 +20,13 @@ function solve(row, col) {
   // save shortest path
 
   let stack = [];
-  stack.push([row, col]); // add starting cell
   let parent = [row, col];
+  let saveParent = []; // contains the parents of unvisited neighbor nodes in case of re-tracing during path dead end
 
+  stack.push([row, col]); // add starting cell
   shortestPath[[row, col]] = "start";
+
+  let wasDeadEnd = false;
 
   do {
     // take a neighbor
@@ -31,6 +34,12 @@ function solve(row, col) {
 
     // finds the neighbor of this cell
     let neighbors = DFSneighbor(cur[0], cur[1]);
+    let neighborLength = neighbors.length;
+
+    // save the parent of neighbors in case there is a dead end, thus displaying unconnected paths
+    for (let i = 0; i < neighbors.length; i++) {
+      saveParent[[neighbors[i][0], neighbors[i][1]]] = [cur[0], cur[1]];
+    }
 
     // add neighbors onto the stack
     // note neighbor() returns in order: right, top, left, bottom
@@ -41,19 +50,33 @@ function solve(row, col) {
 
     // if current cell is the end cell
     if (cur[0] === endCell[0] && cur[1] === endCell[1]) {
+      console.log("found!");
       found = true;
+      if (wasDeadEnd) parent = saveParent[[cur[0], cur[1]]];
       shortestPath[[cur[0], cur[1]]] = parent;
     } else if (
       document.getElementById(cur[0] + "-" + cur[1]).className === "cell"
     ) {
+      // use saved parent if previous cell path was a dead end
+      if (wasDeadEnd) {
+        parent = saveParent[[cur[0], cur[1]]];
+        console.log(parent[0], parent[1]);
+        wasDeadEnd = false;
+      }
+
       shortestPath[[cur[0], cur[1]]] = parent;
       visitedOrder.push([cur[0], cur[1]]);
-      parent = [cur[0], cur[1]];
+
+      // determines if current node is a dead end
+      if (neighborLength !== 0) parent = [cur[0], cur[1]];
+      else wasDeadEnd = true;
+
       document.getElementById(cur[0] + "-" + cur[1]).className = "cell visited";
     }
   } while (stack.length > 0 && !found);
 
-  console.log(shortestPath);
+  // console.log(shortestPath);
+  console.log(saveParent[[4, 24]]);
 
   animateBothPath();
 }
