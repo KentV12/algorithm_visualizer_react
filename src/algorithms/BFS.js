@@ -1,4 +1,4 @@
-// remember: these values will persist through application
+// these values will persist through application
 let visitedOrder = [];
 let shortestPath = [];
 let found = false;
@@ -9,8 +9,8 @@ export function BFS(grid, start, end, rows, cols) {
   endCell = end;
 
   // reset all values
-  visitedOrder = [];
-  shortestPath = [];
+  visitedOrder = []; // a list
+  shortestPath = []; // contains the parent cell of current cell
   found = false;
 
   let queue = [];

@@ -9,20 +9,23 @@ function App() {
   const [curAlgo, setAlgo] = useState("");
 
   const grid = [];
-  const rows = 13;
-  const cols = 30;
-  const start = [6, 3];
-  const end = [6, 26];
+  const rows = 11;
+  const cols = 25;
+  const start = [5, 3];
+  const end = [5, 21]; // was 21
 
   // reset grid
   const clearGrid = () => {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         let name = document.getElementById(row + "-" + col).className;
-        if (name !== "cell start" && name !== "cell end")
+        if (name === "cell path" || name === "cell visitedColor")
           document.getElementById(row + "-" + col).className = "cell";
       }
     }
+
+    document.getElementById(start[0] + "-" + start[1]).className = "cell start";
+    document.getElementById(end[0] + "-" + end[1]).className = "cell end";
   };
 
   // enable wall
@@ -70,7 +73,7 @@ function App() {
 
   const performAlgorithm = () => {
     if (curAlgo === "BFS") BFS(grid, start, end, rows, cols);
-    else if (curAlgo === "DFS") DFS();
+    else if (curAlgo === "DFS") DFS(grid, start, end, rows, cols);
   };
 
   return (
