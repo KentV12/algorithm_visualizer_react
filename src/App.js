@@ -19,7 +19,11 @@ function App() {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         let name = document.getElementById(row + "-" + col).className;
-        if (name === "cell path" || name === "cell visitedColor")
+        if (
+          name === "cell path" ||
+          name === "cell visitedColor" ||
+          name === "cell wall"
+        )
           document.getElementById(row + "-" + col).className = "cell";
       }
     }
@@ -72,8 +76,8 @@ function App() {
   };
 
   const performAlgorithm = () => {
-    if (curAlgo === "BFS") BFS(grid, start, end, rows, cols);
-    else if (curAlgo === "DFS") DFS(grid, start, end, rows, cols);
+    if (curAlgo === "BFS") BFS(start, end, rows, cols);
+    else if (curAlgo === "DFS") DFS(start, end, rows, cols);
   };
 
   return (
