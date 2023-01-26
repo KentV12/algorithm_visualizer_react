@@ -12,7 +12,7 @@ function App() {
   const rows = 11;
   const cols = 25;
   const start = [5, 3];
-  const end = [5, 21]; // was 21
+  const end = [5, 21];
 
   // reset grid
   const clearGrid = () => {
@@ -85,7 +85,8 @@ function App() {
       <h1>Pathfinding Algorithm Visualizer</h1>
       <h4>
         Current Algorithm Supported:{" "}
-        <span style={{ color: "orange" }}>Breadth-First Search</span>
+        <span style={{ color: "orange" }}>Breadth-First Search, </span>
+        <span style={{ color: "green" }}>Depth-First Search</span>
       </h4>
 
       <label className="form-control">
@@ -95,7 +96,7 @@ function App() {
           value={"BFS"}
           onChange={(e) => selectAlgorithm(e.target.value)}
         />
-        BFS
+        Breadth First Search
       </label>
 
       <label className="form-control">
@@ -105,7 +106,7 @@ function App() {
           value={"DFS"}
           onChange={(e) => selectAlgorithm(e.target.value)}
         />
-        DFS
+        Depth First Search
       </label>
 
       <h4>
