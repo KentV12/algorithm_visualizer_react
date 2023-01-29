@@ -9,7 +9,7 @@ export function adjacentNeighbor(row, col, rows, cols) {
 
   // if within grid size
   if (row >= 0 && row < rows && col >= 0 && col < cols) {
-    if (right < 25) {
+    if (right < cols) {
       const rightCell = document.getElementById(row + "-" + right).className;
       if (
         document.getElementById(row + "-" + right) !== null &&
@@ -39,7 +39,7 @@ export function adjacentNeighbor(row, col, rows, cols) {
       }
     }
 
-    if (below < 11) {
+    if (below < rows) {
       const belowCell = document.getElementById(below + "-" + col).className;
       if (
         document.getElementById(below + "-" + col) !== null &&

@@ -12,7 +12,6 @@ body {
   grid-template-columns: 1em auto;
   gap: 0.5em;
   padding-left: 40%;
-  text-align: left;
   margin-top: 10px;
   width: fit-content;
 }
@@ -40,39 +39,56 @@ input[type="radio"]::before {
   border-radius: 50%;
   transform: scale(0);
   transition: 150ms transform ease-in-out;
-  box-shadow: inset 1em 1em rgb(10, 107, 225);
+  box-shadow: inset 1em 1em rgb(6, 135, 233);
 }
 
 input[type="radio"]:checked::before {
   transform: scale(1);
 }
 
+/* .test {
+  width: 50vw;
+  height: 100px;
+  background-color: aqua;
+  margin: auto;
+} */
+
 .container {
-  max-width: max-content;
   /* border: 2px solid steelblue; */
   margin: 30px auto;
-  padding: 30px;
+  /* padding: 30px;  */
   text-align: center;
+  width: 100%;
 }
 
 .gridContainer {
   /* font-size 0 or there will be space between rows */
-  /* outline is now 1px because of border */
   outline: 1px solid black;
   margin: 35px auto;
   font-size: 0;
+  width: 80%;
+  height: 50vh;
 }
 
 .cell {
-  /* outline better than border here or we will need to adjust width minus border px */
-  /* border is needed since background color will overlap with outline, thus no outline */
-  border: 1px solid black;
-  width: 48px;
-  height: 48px;
+  /* 
+  outline better than border here or we will need to adjust width minus border px
+  border is needed since background color will overlap with outline, thus no outline 
+  box-shadow is used due to border affecting overall size when scaling down resolution
+  and background-color only leaving right side of outline when added
+  */
+
+  /* outline: 1px solid black; */
+  width: calc((100% / 40));
+  height: calc((100% / 13));
+  box-shadow: -1px -1px #000;
+
   display: inline-block;
   margin: 0;
   padding: 0;
   text-align: center;
+
+  /* background-color: rgba(0, 142, 250, 0.25); */
 }
 
 .cell.start {

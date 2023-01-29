@@ -9,10 +9,10 @@ function App() {
   const [curAlgo, setAlgo] = useState("");
 
   const grid = [];
-  const rows = 11;
-  const cols = 25;
-  const start = [5, 3];
-  const end = [5, 21];
+  const rows = 13;
+  const cols = 40;
+  const start = [6, 3];
+  const end = [6, 36];
 
   // reset grid
   const clearGrid = () => {
@@ -120,14 +120,7 @@ function App() {
       <button className="btn" onClick={() => clearGrid()}>
         Clear Grid
       </button>
-      <div
-        className="gridContainer"
-        id="grid-container"
-        style={{
-          maxWidth: `${50 * cols}px`, // template literal
-          maxHeight: `${50 * rows}px`,
-        }}
-      >
+      <div className="gridContainer" id="grid-container">
         {grid}
       </div>
     </div>
