@@ -88,7 +88,7 @@ export function animateBothPath(end, found, visitedOrder, shortestPath) {
         setTimeout(() => {
           document.getElementById(cur[0] + "-" + cur[1]).className =
             "cell path";
-        }, timePerGrid * 2 * count); // display shortest path in half the time of visiting cells
+        }, timePerGrid * count); // display shortest path in half the time of visiting cells
         count++;
       }
     }, timePerGrid * count + 1000);
