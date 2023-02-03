@@ -81,6 +81,7 @@ export function animateBothPath(end, found, visitedOrder, shortestPath) {
 
   // if end cell is found
   if (found) {
+    pathArray.reverse();
     setTimeout(() => {
       let count = 0;
       while (pathArray.length > 0) {
