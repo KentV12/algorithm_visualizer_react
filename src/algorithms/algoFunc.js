@@ -96,6 +96,24 @@ export function animateBothPath(end, found, visitedOrder, shortestPath) {
   }
 }
 
+export function randomWeight(rows, cols) {
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      let name = document.getElementById(row + "-" + col).className;
+      if (
+        name === "cell" ||
+        name === "cell weight1" ||
+        name === "cell weight2" ||
+        name === "cell weight3"
+      ) {
+        let weight = Math.floor(Math.random() * 3) + 1;
+        document.getElementById(row + "-" + col).className =
+          "cell weight" + weight;
+      }
+    }
+  }
+}
+
 // return if cell is the end cell
 function isEnd(cell, endCell) {
   let isEnd = false;

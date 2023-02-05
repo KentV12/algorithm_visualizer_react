@@ -103,6 +103,18 @@ input[type="radio"]:checked::before {
   background-color: brown;
 }
 
+.cell.weight1 {
+  background-color: rgb(201, 201, 201);
+}
+
+.cell.weight2 {
+  background-color: rgb(160, 160, 160);
+}
+
+.cell.weight3 {
+  background-color: rgb(123, 123, 123);
+}
+
 @keyframes visitAnimation {
   from {background-color: rgb(0, 183, 255);}
   to {background-color: aquamarine;}

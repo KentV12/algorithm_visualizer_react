@@ -3,6 +3,8 @@ import { useState } from "react";
 import Cell from "./components/Cell";
 import { BFS } from "./algorithms/BFS";
 import { DFS } from "./algorithms/DFS";
+import { Dijkstras } from "./algorithms/Dijkstras";
+import { randomWeight } from "./algorithms/algoFunc";
 
 function App() {
   const [wall, setWall] = useState(false);
@@ -19,11 +21,7 @@ function App() {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         let name = document.getElementById(row + "-" + col).className;
-        if (
-          name === "cell path" ||
-          name === "cell visitedColor" ||
-          name === "cell wall"
-        )
+        if (name !== "cell wall")
           document.getElementById(row + "-" + col).className = "cell";
       }
     }
@@ -78,6 +76,7 @@ function App() {
   const performAlgorithm = () => {
     if (curAlgo === "BFS") BFS(start, end, rows, cols);
     else if (curAlgo === "DFS") DFS(start, end, rows, cols);
+    else if (curAlgo === "Dijkstras") Dijkstras(start, end, rows, cols);
   };
 
   return (
@@ -109,6 +108,16 @@ function App() {
         Depth First Search
       </label>
 
+      <label className="form-control">
+        <input
+          type={"radio"}
+          name="algo"
+          value={"Dijkstras"}
+          onChange={(e) => selectAlgorithm(e.target.value)}
+        />
+        Dijkstra's (weighted)
+      </label>
+
       <h4>
         Adding <span style={{ color: "brown" }}>Wall</span>: Click to enable
         wall and Hover to add. Click again to Stop.
@@ -120,6 +129,10 @@ function App() {
       <button className="btn" onClick={() => clearGrid()}>
         Clear Grid
       </button>
+      <button className="btn" onClick={() => randomWeight(rows, cols)}>
+        Randomize Weight
+      </button>
+
       <div className="gridContainer" id="grid-container">
         {grid}
       </div>
