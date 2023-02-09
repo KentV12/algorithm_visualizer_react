@@ -3,8 +3,8 @@ export function adjacentNeighbor(row, col, rows, cols) {
   let neighbors = [];
 
   const right = col + 1;
-  const above = row - 1;
   const left = col - 1;
+  const above = row - 1;
   const below = row + 1;
 
   // if within grid size
@@ -13,44 +13,53 @@ export function adjacentNeighbor(row, col, rows, cols) {
       const rightCell = document.getElementById(row + "-" + right).className;
       if (
         document.getElementById(row + "-" + right) !== null &&
-        (rightCell === "cell" || rightCell === "cell end")
-      ) {
+        validNeighbor(rightCell)
+      )
         neighbors.push([row, right]);
-      }
     }
 
     if (above >= 0) {
       const aboveCell = document.getElementById(above + "-" + col).className;
       if (
         document.getElementById(above + "-" + col) !== null &&
-        (aboveCell === "cell" || aboveCell === "cell end")
-      ) {
+        validNeighbor(aboveCell)
+      )
         neighbors.push([above, col]);
-      }
     }
 
     if (left >= 0) {
       const leftCell = document.getElementById(row + "-" + left).className;
       if (
         document.getElementById(row + "-" + left) !== null &&
-        (leftCell === "cell" || leftCell === "cell end")
-      ) {
+        validNeighbor(leftCell)
+      )
         neighbors.push([row, left]);
-      }
     }
 
     if (below < rows) {
       const belowCell = document.getElementById(below + "-" + col).className;
       if (
         document.getElementById(below + "-" + col) !== null &&
-        (belowCell === "cell" || belowCell === "cell end")
-      ) {
+        validNeighbor(belowCell)
+      )
         neighbors.push([below, col]);
-      }
     }
   }
 
   return neighbors;
+}
+
+function validNeighbor(name) {
+  const validNames = [
+    "cell",
+    "cell weight1",
+    "cell weight2",
+    "cell weight3",
+    "cell end",
+  ];
+
+  if (validNames.includes(name)) return true;
+  else return false;
 }
 
 export function animateBothPath(end, found, visitedOrder, shortestPath) {

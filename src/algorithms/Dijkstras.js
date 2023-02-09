@@ -11,14 +11,16 @@ export function Dijkstras(start, end, rows, cols) {
 }
 
 function solve(start, end, rows, cols) {
-  let dist = []; // array contains the shortest distance from starting cell to any cell
-  let prev = []; // array contains the parent of the cell that went to the current cell
-  let queue = []; // a queue containing a cell and its weight
+  let dist = []; // array contains the shortest distance from starting node to any node
+  let prev = []; // array contains the parent of the node that went to the current node
+  let visited = []; // array contains whether a node has been visited at a certain index
+  let queue = []; // a queue containing a node and its weight
 
-  // fill the dist array with
+  // fill the dist array with starting values
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      dist[[i, j]] = -1;
+      dist[[i, j]] = Infinity;
+      visited[[i, j]] = false;
     }
   }
 
@@ -28,10 +30,24 @@ function solve(start, end, rows, cols) {
   while (count < 1) {
     // get the cell with shortest path
     let node = queue.shift();
-    let weight = nodeWeight(node[0], node[1]);
+    let row = node[0];
+    let col = node[1];
+
+    let weight = nodeWeight(row, col);
+
+    // skip if visited
+    if (visited[[row, col]] === true) {
+      continue;
+    }
+
+    // mark node as visited
+    visited[[row, col]] = true;
+
+    // get neighbors
+    let neighbors = adjacentNeighbor(row, col, rows, cols);
 
     // check and update distance
-    // get neighbors
+
     // add to queue
     count += 1;
   }
