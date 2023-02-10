@@ -73,7 +73,7 @@ export function animateBothPath(end, found, visitedOrder, shortestPath) {
       // if not the last cell
       setTimeout(() => {
         document.getElementById(cell[0] + "-" + cell[1]).className =
-          "cell visitedColor"; // change to visited
+          "cell visitedColor";
       }, timePerGrid * count); // Multiplied by count means every 10ms this will be called
       count++;
     }
@@ -82,14 +82,13 @@ export function animateBothPath(end, found, visitedOrder, shortestPath) {
   let cur = shortestPath[[end[0], end[1]]];
   let pathArray = [];
 
-  // while the parent cell of current cell is not the start
-  while (shortestPath[[cur[0], cur[1]]] !== "start") {
-    pathArray.push([cur[0], cur[1]]);
-    cur = shortestPath[[cur[0], cur[1]]];
-  }
-
   // if end cell is found
   if (found) {
+    // while the parent cell of current cell is not the start
+    while (shortestPath[[cur[0], cur[1]]] !== "start") {
+      pathArray.push([cur[0], cur[1]]);
+      cur = shortestPath[[cur[0], cur[1]]];
+    }
     pathArray.reverse();
     setTimeout(() => {
       let count = 0;
