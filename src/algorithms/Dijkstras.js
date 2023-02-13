@@ -4,18 +4,20 @@ import { animateBothPath } from "./algoFunc";
 let visitedOrder = [];
 let shortestPath = [];
 let found = false;
-let queue = [];
 
 export function Dijkstras(start, end, rows, cols) {
-  console.log("in Dijkstras");
+  visitedOrder = [];
+  shortestPath = [];
+  found = false;
+
+  shortestPath[[start[0], start[1]]] = "start";
+
   solve(start, end, rows, cols);
   animateBothPath(end, found, visitedOrder, shortestPath);
-  console.log(visitedOrder);
 }
 
 function solve(start, end, rows, cols) {
   let dist = []; // array contains the shortest distance from starting node to any node
-  let prev = []; // array contains the parent of the node that went to the current node
   let visited = []; // array contains whether a node has been visited at a certain index
   let queue = []; // a queue containing a node and its distance from the start node
 
@@ -29,17 +31,20 @@ function solve(start, end, rows, cols) {
 
   queue.push([start[0], start[1], 0]);
 
-  let count = 0;
-  while (count < 100) {
+  while (queue.length > 0 && !found) {
     // get the cell with shortest path
     let node = queue.shift();
     let row = node[0];
     let col = node[1];
     let curDist = node[2];
-    let weight = nodeWeight(row, col);
 
     // skip if visited
     if (visited[[row, col]] === true) {
+      continue;
+    }
+
+    if (row === end[0] && col === end[1]) {
+      found = true;
       continue;
     }
 
@@ -66,14 +71,11 @@ function solve(start, end, rows, cols) {
       let newDist = curDist + nWeight;
       if (dist[[nRow, nCol]] > newDist) {
         dist[[nRow, nCol]] = newDist;
+        shortestPath[[nRow, nCol]] = [row, col];
         orderedInsert(queue, neighbor, newDist); // add to queue
       }
     }
-
-    count += 1;
   }
-
-  // console.log(queue);
 }
 
 function nodeWeight(row, col) {
