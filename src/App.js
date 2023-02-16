@@ -39,6 +39,16 @@ function App() {
       document.getElementById(id).className = "cell wall";
   };
 
+  const clearWall = () => {
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        let name = document.getElementById(row + "-" + col).className;
+        if (name === "cell wall")
+          document.getElementById(row + "-" + col).className = "cell";
+      }
+    }
+  };
+
   // when hovering and wall is enabled
   const handleMouseDown = (id) => {
     const name = document.getElementById(id).className;
@@ -126,11 +136,14 @@ function App() {
       <button onClick={() => performAlgorithm()} className="btn">
         Visualize
       </button>
-      <button className="btn" onClick={() => clearGrid()}>
-        Clear Grid
-      </button>
       <button className="btn" onClick={() => randomWeight(rows, cols)}>
         Randomize Weight
+      </button>
+      <button className="btn" onClick={() => clearWall()}>
+        Clear Wall
+      </button>
+      <button className="btn" onClick={() => clearGrid()}>
+        Clear Grid
       </button>
 
       <div className="gridContainer" id="grid-container">
