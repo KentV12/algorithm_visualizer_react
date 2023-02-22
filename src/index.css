@@ -5,14 +5,85 @@ body {
   margin: 0%;
 }
 
-@media (min-width: 542px) {
+@media (max-width: 542px) {
   .form-control {
-    padding-left: 40%;
+    padding-left: 20%;
   }
 }
 
-.form-control {
-  font-size: 1.5rem;
+.nav-link {
+  color: #fff;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background-color: #198754;
+}
+
+.dropdown-item {
+  color: #fff;
+}
+
+.dropdown-item:hover {
+  color: #fff;
+  background-color: #198754;
+}
+
+/* .Nav {
+  background-color: #333;
+  padding: 1rem;
+}
+
+.dropdown {
+  display: inline;
+  padding: 1rem;
+  color: white;
+  background-color: #333;
+}
+
+.dropdown:hover {
+  background-color: #111;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  padding: 15px;
+}
+
+li {
+  display: inline;
+  align-items: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  padding: 20px;
+  font-size: 1.25rem;
+}
+
+a:hover {
+  background-color: #111;
+} */
+
+/* .notGrid {
+  width: fit-content;
+  margin: auto;
+} */
+
+/* h1 {
+  text-align: center;
+  justify-content: center;
+  width: fit-content;
+} */
+
+/* .rad-button { */
+  /* font-size: 1.5rem; */
+  /* font-size: clamp(1rem, -0.875rem + 8.333vw, 1.5rem);
   font-weight: bold;
   line-height: 1.1;
   display: grid;
@@ -20,9 +91,9 @@ body {
   gap: 0.5em;
   margin-top: 10px;
   width: fit-content;
-}
+} */
 
-input[type="radio"] {
+/* input[type="radio"] {
   -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
@@ -50,15 +121,15 @@ input[type="radio"]::before {
 
 input[type="radio"]:checked::before {
   transform: scale(1);
-}
+} */
 
-.container {
+/* .container { */
   /* border: 2px solid steelblue; */
-  margin: auto;
-  padding: 30px; 
-  text-align: center;
-  width: 100%;
-}
+  /* margin: auto; */
+  /* padding: 2rem; */
+  /* text-align: center; */
+  /* width: 100%; */
+/* } */
 
 .gridContainer {
   /* font-size 0 or there will be space between rows */
@@ -136,7 +207,7 @@ input[type="radio"]:checked::before {
   background-color: yellow;
 }
 
-.btn {
+.my-btn {
   background: #000;
   color: #fff;
   border: none;
