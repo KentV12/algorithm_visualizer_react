@@ -92,63 +92,8 @@ function App() {
 
   return (
     <div>
-      <div className="navbar navbar-expand-sm bg-dark" data-bs-theme="dark">
-        <div className="container">
-          <a href="#" className="navbar-brand">
-            Pathfinding Visualizer
-          </a>
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item mx-2">
-                <a href="#" className="nav-link">
-                  Select Animation
-                </a>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                >
-                  Select Algorithm
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a
-                      className="dropdown-item"
-                      href={"#"}
-                      onClick={() => selectAlgorithm("BFS")}
-                    >
-                      Breadth First Search
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="dropdown-item"
-                      href="#"
-                      onClick={() => selectAlgorithm("DFS")}
-                    >
-                      Depth First Search
-                    </a>
-                    <a
-                      className="dropdown-item"
-                      href="#"
-                      onClick={() => selectAlgorithm("Dijkstras")}
-                    >
-                      Dijkstra's (weighted)
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
       <div className="text-center">
-        <Navbar />
-        {/* <h1>Pathfinding Algorithm Visualizer</h1> */}
+        <Navbar selectAlgorithm={selectAlgorithm} />
         <div className="my-4">
           <h4>
             Current Algorithm Supported:{" "}
@@ -160,36 +105,6 @@ function App() {
             wall and Hover to add. Click again to Stop.
           </h4>
         </div>
-
-        {/* <label className="form-control">
-          <input
-            type={"radio"}
-            name="algo"
-            value={"BFS"}
-            onChange={(e) => selectAlgorithm(e.target.value)}
-          />
-          Breadth First Search
-        </label>
-
-        <label className="form-control">
-          <input
-            type={"radio"}
-            name="algo"
-            value={"DFS"}
-            onChange={(e) => selectAlgorithm(e.target.value)}
-          />
-          Depth First Search
-        </label>
-
-        <label className="form-control">
-          <input
-            type={"radio"}
-            name="algo"
-            value={"Dijkstras"}
-            onChange={(e) => selectAlgorithm(e.target.value)}
-          />
-          Dijkstra's (weighted)
-        </label> */}
 
         <button
           onClick={() => performAlgorithm()}
@@ -203,10 +118,10 @@ function App() {
         >
           Randomize Weight
         </button>
-        <button className="btn btn-success m-1" onClick={() => clearWall()}>
+        <button className="btn btn-primary m-1" onClick={() => clearWall()}>
           Clear Wall
         </button>
-        <button className="btn btn-success m-1" onClick={() => clearGrid()}>
+        <button className="btn btn-primary m-1" onClick={() => clearGrid()}>
           Clear Grid
         </button>
       </div>
