@@ -2,10 +2,15 @@ import { useState } from "react";
 
 const Navbar = ({ selectAlgorithm }) => {
   const [navAlgorithm, setAlgorithm] = useState("Select Algorithm");
+  const [navAnimation, setAnimation] = useState("Select Animation");
 
   const clickAlgorithm = (algorithm) => {
     setAlgorithm("Algorithm: " + algorithm);
     selectAlgorithm(algorithm);
+  };
+
+  const clickAnimation = (animation) => {
+    setAnimation("Animation: " + animation);
   };
 
   return (
@@ -24,11 +29,24 @@ const Navbar = ({ selectAlgorithm }) => {
                   data-bs-toggle="dropdown"
                   type="button"
                 >
-                  Select Animation
+                  {navAnimation}
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <button className="dropdown-item">(In Progress)</button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => clickAnimation("Visited Path")}
+                    >
+                      Visited Path
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => clickAnimation("Outer Scan")}
+                    >
+                      Outer Scan
+                    </button>
                   </li>
                 </ul>
               </li>

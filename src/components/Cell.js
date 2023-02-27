@@ -6,11 +6,11 @@ const Cell = ({
   handleMouseDown,
   handleMouseClick,
 }) => {
-  let className = "cell";
+  let className = "cell empty";
 
-  if (isStart) className += " start";
-  if (isEnd) className += " end";
-  if (isWall) className += " wall";
+  if (isStart) className = "cell start";
+  if (isEnd) className = "cell end";
+  if (isWall) className = "cell wall";
 
   return (
     <div

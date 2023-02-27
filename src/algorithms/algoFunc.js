@@ -51,7 +51,7 @@ export function adjacentNeighbor(row, col, rows, cols) {
 
 function validNeighbor(name) {
   const validNames = [
-    "cell",
+    "cell none",
     "cell weight1",
     "cell weight2",
     "cell weight3",
@@ -69,11 +69,19 @@ export function animateBothPath(end, found, visitedOrder, shortestPath) {
   while (visitedOrder.length > 0) {
     let cell = visitedOrder.shift();
 
+    let cellName = document.getElementById(cell[0] + "-" + cell[1]).className;
+    // console.log(cellName);
+
+    // if (normal animation) {
+    // let className = "cell empty visitedColor";
+    // if (pulse animation)
+    let className = cellName + " visitedColor";
+
     if (!isEnd(cell, end)) {
       // if not the last cell
       setTimeout(() => {
-        document.getElementById(cell[0] + "-" + cell[1]).className =
-          "cell visitedColor";
+        document.getElementById(cell[0] + "-" + cell[1]).className = className;
+        // cellName + " visitedColor";
       }, timePerGrid * count); // Multiplied by count means every 10ms this will be called
       count++;
     }
@@ -109,7 +117,7 @@ export function randomWeight(rows, cols) {
     for (let col = 0; col < cols; col++) {
       let name = document.getElementById(row + "-" + col).className;
       if (
-        name === "cell" ||
+        name === "cell empty" ||
         name === "cell weight1" ||
         name === "cell weight2" ||
         name === "cell weight3"

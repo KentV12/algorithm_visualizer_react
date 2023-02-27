@@ -23,7 +23,7 @@ function App() {
       for (let col = 0; col < cols; col++) {
         let name = document.getElementById(row + "-" + col).className;
         if (name !== "cell wall")
-          document.getElementById(row + "-" + col).className = "cell";
+          document.getElementById(row + "-" + col).className = "cell empty";
       }
     }
 
@@ -45,7 +45,7 @@ function App() {
       for (let col = 0; col < cols; col++) {
         let name = document.getElementById(row + "-" + col).className;
         if (name === "cell wall")
-          document.getElementById(row + "-" + col).className = "cell";
+          document.getElementById(row + "-" + col).className = "cell empty";
       }
     }
   };
@@ -80,7 +80,6 @@ function App() {
 
   // choose algorithm
   const selectAlgorithm = (selectedAlgo) => {
-    console.log("selected algorithm: " + selectedAlgo);
     setAlgo(selectedAlgo);
   };
 
@@ -94,12 +93,7 @@ function App() {
     <div>
       <div className="text-center">
         <Navbar selectAlgorithm={selectAlgorithm} />
-        <div className="my-4">
-          <h4>
-            Current Algorithm Supported:{" "}
-            <span style={{ color: "orange" }}>Breadth-First Search, </span>
-            <span style={{ color: "green" }}>Depth-First Search</span>
-          </h4>
+        <div className="py-4">
           <h4>
             Adding <span style={{ color: "brown" }}>Wall</span>: Click to enable
             wall and Hover to add. Click again to Stop.
@@ -126,9 +120,13 @@ function App() {
         </button>
       </div>
 
-      <div className="gridContainer" id="grid-container">
+      <div className="container mt-5" style={{ fontSize: 0 }}>
         {grid}
       </div>
+
+      {/* <div className="gridContainer" id="grid-container">
+        {grid}
+      </div> */}
     </div>
   );
 }

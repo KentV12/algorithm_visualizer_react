@@ -3,6 +3,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
   margin: 0%;
+  /* background-color: #000; */
 }
 
 @media (max-width: 542px) {
@@ -146,12 +147,18 @@ input[type="radio"]:checked::before {
   border is needed since background color will overlap with outline, thus no outline 
   box-shadow is used due to border affecting overall size when scaling down resolution
   and background-color only leaving right side of outline when added
+  add background-color as white to fix combining outline
   */
 
-  /* outline: 1px solid black; */
+  outline: 1px solid black;
+  /* width: calc((100% / 40));
+  height: calc((100% / 13)); */
+
   width: calc((100% / 40));
-  height: calc((100% / 13));
-  box-shadow: -1px -1px #000;
+  height: 30px;
+
+  /* box-shadow: -1px -1px #000;
+  box-shadow: 1px 1px #000; */
 
   display: inline-block;
   margin: 0;
@@ -159,6 +166,10 @@ input[type="radio"]:checked::before {
   text-align: center;
 
   /* background-color: rgba(0, 142, 250, 0.25); */
+}
+
+.cell.empty {
+  background-color: #fff;
 }
 
 .cell.start {
@@ -190,7 +201,22 @@ input[type="radio"]:checked::before {
   to {background-color: aquamarine;}
 }
 
-.cell.visitedColor {
+.cell.weight1.visitedColor {
+  animation-name: visitAnimation;
+  animation-duration: 0.5s;
+}
+
+.cell.weight2.visitedColor {
+  animation-name: visitAnimation;
+  animation-duration: 0.5s;
+}
+
+.cell.weight3.visitedColor {
+  animation-name: visitAnimation;
+  animation-duration: 0.5s;
+}
+
+.cell.empty.visitedColor {
   animation-name: visitAnimation;
   background-color: aquamarine;
   animation-duration: 1s;
