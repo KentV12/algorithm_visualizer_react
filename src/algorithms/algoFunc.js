@@ -51,7 +51,7 @@ export function adjacentNeighbor(row, col, rows, cols) {
 
 function validNeighbor(name) {
   const validNames = [
-    "cell none",
+    "cell empty",
     "cell weight1",
     "cell weight2",
     "cell weight3",
@@ -62,20 +62,24 @@ function validNeighbor(name) {
   else return false;
 }
 
-export function animateBothPath(end, found, visitedOrder, shortestPath) {
+export function animateBothPath(
+  end,
+  found,
+  visitedOrder,
+  shortestPath,
+  animationType
+) {
   const timePerGrid = 25;
   let count = 0;
 
   while (visitedOrder.length > 0) {
     let cell = visitedOrder.shift();
+    let className = "";
 
     let cellName = document.getElementById(cell[0] + "-" + cell[1]).className;
-    // console.log(cellName);
 
-    // if (normal animation) {
-    // let className = "cell empty visitedColor";
-    // if (pulse animation)
-    let className = cellName + " visitedColor";
+    if (animationType === "Visited Path") className = "cell visitedPath";
+    if (animationType === "Outer Scan") className = cellName + " outerScan";
 
     if (!isEnd(cell, end)) {
       // if not the last cell

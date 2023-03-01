@@ -1,5 +1,4 @@
 import { adjacentNeighbor } from "./algoFunc";
-import { animateBothPath } from "./algoFunc";
 
 // these values will persist through application
 let visitedOrder = [];
@@ -13,12 +12,18 @@ export function BFS(start, end, rows, cols) {
   found = false;
 
   solve(start, end, rows, cols);
-  animateBothPath(end, found, visitedOrder, shortestPath);
+
+  return {
+    visitedOrder: visitedOrder,
+    shortestPath: shortestPath,
+    found: found,
+  };
 }
 
 function solve(start, end, rows, cols) {
   let queue = [];
   let neighbors = [];
+  let visited = [];
   let cur = null;
 
   queue.push([start[0], start[1]]);
@@ -32,20 +37,22 @@ function solve(start, end, rows, cols) {
     while (neighbors.length > 0 && found === false) {
       let neighbor = neighbors.shift(); // get first neighbor from neighbors
 
-      // add to visited order to animate
-      visitedOrder.push([neighbor[0], neighbor[1]]);
-      // remember the parent cell of this neighbor cell
-      shortestPath[[neighbor[0], neighbor[1]]] = [cur[0], cur[1]];
+      // check if this neighbor has been visited
+      if (visited[[neighbor[0], neighbor[1]]] !== true) {
+        // add to visited order to animate
+        visitedOrder.push([neighbor[0], neighbor[1]]);
+        // remember the parent cell of this neighbor cell
+        shortestPath[[neighbor[0], neighbor[1]]] = [cur[0], cur[1]];
 
-      if (neighbor[0] === end[0] && neighbor[1] === end[1]) {
-        found = true;
-      } else {
-        document.getElementById(neighbor[0] + "-" + neighbor[1]).className =
-          "cell visited";
+        if (neighbor[0] === end[0] && neighbor[1] === end[1]) {
+          found = true;
+        }
+
+        // add current neighbor to queue
+        queue.push([neighbor[0], neighbor[1]]);
+
+        visited[[neighbor[0], neighbor[1]]] = true;
       }
-
-      // add current neighbor to queue
-      queue.push([neighbor[0], neighbor[1]]);
     }
   } while (queue.length > 0 && found === false);
 }

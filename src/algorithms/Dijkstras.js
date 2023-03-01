@@ -1,5 +1,4 @@
 import { adjacentNeighbor } from "./algoFunc";
-import { animateBothPath } from "./algoFunc";
 
 let visitedOrder = [];
 let shortestPath = [];
@@ -13,7 +12,12 @@ export function Dijkstras(start, end, rows, cols) {
   shortestPath[[start[0], start[1]]] = "start";
 
   solve(start, end, rows, cols);
-  animateBothPath(end, found, visitedOrder, shortestPath);
+
+  return {
+    visitedOrder: visitedOrder,
+    shortestPath: shortestPath,
+    found: found,
+  };
 }
 
 function solve(start, end, rows, cols) {

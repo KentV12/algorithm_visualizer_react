@@ -4,12 +4,13 @@ import Cell from "./components/Cell";
 import { BFS } from "./algorithms/BFS";
 import { DFS } from "./algorithms/DFS";
 import { Dijkstras } from "./algorithms/Dijkstras";
-import { randomWeight } from "./algorithms/algoFunc";
+import { animateBothPath, randomWeight } from "./algorithms/algoFunc";
 import Navbar from "./components/Navbar";
 
 function App() {
   const [wall, setWall] = useState(false);
   const [curAlgo, setAlgo] = useState("");
+  const [curAnim, setAnim] = useState("");
 
   const grid = [];
   const rows = 13;
@@ -78,21 +79,40 @@ function App() {
     }
   }
 
+  // choose animation
+  const selectAnimation = (selectedAnim) => {
+    setAnim(selectedAnim);
+  };
+
   // choose algorithm
   const selectAlgorithm = (selectedAlgo) => {
     setAlgo(selectedAlgo);
   };
 
   const performAlgorithm = () => {
-    if (curAlgo === "BFS") BFS(start, end, rows, cols);
-    else if (curAlgo === "DFS") DFS(start, end, rows, cols);
-    else if (curAlgo === "Dijkstras") Dijkstras(start, end, rows, cols);
+    let dict = null;
+
+    if (curAlgo === "BFS") dict = BFS(start, end, rows, cols);
+    else if (curAlgo === "DFS") dict = DFS(start, end, rows, cols);
+    else if (curAlgo === "Dijkstras") dict = Dijkstras(start, end, rows, cols);
+
+    if (curAlgo !== "" && curAnim !== "")
+      animateBothPath(
+        end,
+        dict["found"],
+        dict["visitedOrder"],
+        dict["shortestPath"],
+        curAnim
+      );
   };
 
   return (
     <div>
       <div className="text-center">
-        <Navbar selectAlgorithm={selectAlgorithm} />
+        <Navbar
+          selectAlgorithm={selectAlgorithm}
+          selectAnimation={selectAnimation}
+        />
         <div className="py-4">
           <h4>
             Adding <span style={{ color: "brown" }}>Wall</span>: Click to enable
