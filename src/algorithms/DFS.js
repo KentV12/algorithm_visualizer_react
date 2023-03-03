@@ -1,4 +1,4 @@
-import { adjacentNeighbor } from "./algoFunc";
+import { adjacentNeighbor, validNeighbor } from "./algoFunc";
 
 let visitedOrder = [];
 let shortestPath = [];
@@ -38,7 +38,7 @@ function solve(row, col, rows, cols) {
     if (visited[[cur[0], cur[1]]] !== true) {
       // finds the neighbor of this cell
       let neighbors = adjacentNeighbor(cur[0], cur[1], rows, cols);
-      let neighborLength = validNeighbor(neighbors, visited);
+      let neighborLength = unvisitedNeighbor(neighbors, visited);
 
       // let neightbor
 
@@ -60,8 +60,8 @@ function solve(row, col, rows, cols) {
         if (wasDeadEnd) parent = saveParent[[cur[0], cur[1]]];
         shortestPath[[cur[0], cur[1]]] = parent;
       } else if (
-        document.getElementById(cur[0] + "-" + cur[1]).className ===
-        "cell empty"
+        validNeighbor(document.getElementById(cur[0] + "-" + cur[1]).className)
+        // === "cell empty"
       ) {
         // use saved parent if previous cell path was a dead end to prevent path
         if (wasDeadEnd) {
@@ -84,7 +84,7 @@ function solve(row, col, rows, cols) {
   } while (stack.length > 0 && !found);
 }
 
-function validNeighbor(neighbors, visited) {
+function unvisitedNeighbor(neighbors, visited) {
   let count = 0;
 
   for (let i = 0; i < neighbors.length; i++) {

@@ -13,10 +13,10 @@ function App() {
   const [curAnim, setAnim] = useState("");
 
   const grid = [];
-  const rows = 13;
-  const cols = 40;
-  const start = [6, 3];
-  const end = [6, 36];
+  const rows = 25;
+  const cols = 80;
+  const start = [12, 15];
+  const end = [12, 65];
 
   // reset grid
   const clearGrid = () => {
@@ -140,7 +140,7 @@ function App() {
         </button>
       </div>
 
-      <div className="container mt-5" style={{ fontSize: 0 }}>
+      <div className="container-fluid mt-5" style={{ fontSize: 0 }}>
         {grid}
       </div>
 

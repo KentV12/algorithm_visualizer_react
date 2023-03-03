@@ -49,7 +49,7 @@ export function adjacentNeighbor(row, col, rows, cols) {
   return neighbors;
 }
 
-function validNeighbor(name) {
+export function validNeighbor(name) {
   const validNames = [
     "cell empty",
     "cell weight1",

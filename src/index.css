@@ -30,108 +30,6 @@ body {
   background-color: #198754;
 }
 
-/* .Nav {
-  background-color: #333;
-  padding: 1rem;
-}
-
-.dropdown {
-  display: inline;
-  padding: 1rem;
-  color: white;
-  background-color: #333;
-}
-
-.dropdown:hover {
-  background-color: #111;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  padding: 15px;
-}
-
-li {
-  display: inline;
-  align-items: center;
-}
-
-a {
-  color: white;
-  text-decoration: none;
-  padding: 20px;
-  font-size: 1.25rem;
-}
-
-a:hover {
-  background-color: #111;
-} */
-
-/* .notGrid {
-  width: fit-content;
-  margin: auto;
-} */
-
-/* h1 {
-  text-align: center;
-  justify-content: center;
-  width: fit-content;
-} */
-
-/* .rad-button { */
-  /* font-size: 1.5rem; */
-  /* font-size: clamp(1rem, -0.875rem + 8.333vw, 1.5rem);
-  font-weight: bold;
-  line-height: 1.1;
-  display: grid;
-  grid-template-columns: 1em auto;
-  gap: 0.5em;
-  margin-top: 10px;
-  width: fit-content;
-} */
-
-/* input[type="radio"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: #fff;
-  margin: 0;
-  font: inherit;
-  color: black;
-  width: 1.15em;
-  height: 1.15em;
-  border: 0.15em solid black;
-  border-radius: 50%;
-
-  display: grid;
-  place-content: center;
-}
-
-input[type="radio"]::before {
-  content: "";
-  width: 0.65em;
-  height: 0.65em;
-  border-radius: 50%;
-  transform: scale(0);
-  transition: 150ms transform ease-in-out;
-  box-shadow: inset 1em 1em rgb(6, 135, 233);
-}
-
-input[type="radio"]:checked::before {
-  transform: scale(1);
-} */
-
-/* .container { */
-  /* border: 2px solid steelblue; */
-  /* margin: auto; */
-  /* padding: 2rem; */
-  /* text-align: center; */
-  /* width: 100%; */
-/* } */
-
 .gridContainer {
   /* font-size 0 or there will be space between rows */
   box-shadow: 1px 1px #000;
@@ -150,11 +48,11 @@ input[type="radio"]:checked::before {
   add background-color as white to fix combining outline
   */
 
-  outline: 1px solid black;
+  outline: 1px solid cornflowerblue;
   /* width: calc((100% / 40));
   height: calc((100% / 13)); */
 
-  width: calc((100% / 40));
+  width: calc((100% / 80));
   height: 30px;
 
   /* box-shadow: -1px -1px #000;
@@ -183,7 +81,7 @@ input[type="radio"]:checked::before {
 }
 
 .cell.wall {
-  background-color: brown;
+  background-color: rgb(45, 97, 188);
 }
 
 .cell.weight1 {
@@ -205,17 +103,17 @@ input[type="radio"]:checked::before {
 
 .cell.weight1.outerScan {
   animation-name: visitAnimation;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
 }
 
 .cell.weight2.outerScan {
   animation-name: visitAnimation;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
 }
 
 .cell.weight3.outerScan {
   animation-name: visitAnimation;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
 }
 
 .cell.empty.outerScan {
