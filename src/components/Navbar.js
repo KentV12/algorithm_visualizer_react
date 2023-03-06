@@ -16,12 +16,25 @@ const Navbar = ({ selectAlgorithm, selectAnimation }) => {
 
   return (
     <div>
-      <div className="navbar navbar-expand-sm bg-dark" data-bs-theme="dark">
+      <div
+        className="navbar navbar-expand-md bg-dark navbar-dark"
+        data-bs-theme="dark"
+      >
         <div className="container">
           <a className="navbar-brand" href="/">
             Pathfinding Visualizer
           </a>
-          <div className="collapse navbar-collapse">
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navmenu"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navmenu">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item dropdown mx-2">
                 <a
