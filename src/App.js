@@ -117,7 +117,7 @@ function App() {
           <h3 className="fw-bold">Tutorial</h3>
         </div>
 
-        <div className="col-4 mx-auto text-start mb-4">
+        <div className="col-md-4 mx-auto text-start mb-4">
           <h5>
             1. Select algorithm and animation type in the top right menu <br />
             2. Add weight (if supported by algorithm) <br />
