@@ -13,10 +13,10 @@ function App() {
   const [curAnim, setAnim] = useState("");
 
   const grid = [];
-  const rows = 25;
+  const rows = 20;
   const cols = 80;
-  const start = [12, 15];
-  const end = [12, 65];
+  const start = [10, 15];
+  const end = [10, 65];
 
   // reset grid
   const clearGrid = () => {
@@ -113,11 +113,17 @@ function App() {
           selectAlgorithm={selectAlgorithm}
           selectAnimation={selectAnimation}
         />
-        <div className="py-4">
-          <h4>
-            Adding <span style={{ color: "brown" }}>Wall</span>: Click to enable
-            wall and Hover to add. Click again to Stop.
-          </h4>
+        <div className="mt-4">
+          <h3 className="fw-bold">Tutorial</h3>
+        </div>
+
+        <div className="col-4 mx-auto text-start mb-4">
+          <h5>
+            1. Select algorithm and animation type in the top right menu <br />
+            2. Add weight (if supported by algorithm) <br />
+            Adding <span style={{ color: "brown" }}>Wall</span>: click a node to
+            enable wall and hover to add. Click again to Stop.
+          </h5>
         </div>
 
         <button
