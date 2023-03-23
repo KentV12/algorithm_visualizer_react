@@ -13,10 +13,10 @@ function App() {
   const [curAnim, setAnim] = useState("");
 
   const grid = [];
-  const rows = 20;
+  const rows = 28;
   const cols = 80;
-  const start = [10, 15];
-  const end = [10, 65];
+  const start = [14, 15];
+  const end = [14, 65];
 
   // reset grid
   const clearGrid = () => {
