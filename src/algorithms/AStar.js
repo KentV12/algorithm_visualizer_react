@@ -7,6 +7,8 @@ let found = false;
 export function AStar(start, end, rows, cols) {
   solve(start, end, rows, cols);
 
+  shortestPath[[start[0], start[1]]] = "start";
+
   return {
     visitedOrder: visitedOrder,
     shortestPath: shortestPath,
@@ -23,12 +25,11 @@ function solve(start, end, rows, cols) {
   open.push([start[0], start[1]]);
   fList[start] = Math.abs(start[0] - end[0]) + Math.abs(start[1] - end[1]); // initialize f-value for getLowest()
 
-  let test = open.splice(0, 1)[0];
+  // let test = open.splice(0, 1)[0];
   // let test = open.pop();
-  console.log("row " + test[0]);
-  console.log("col " + test[1]);
-
-  console.log("new open: " + open);
+  // let test = getLowest(open, fList);
+  // console.log("row " + test[0]);
+  // console.log("col " + test[1]);
 
   // fill the dist array with starting values
   for (let i = 0; i < rows; i++) {
@@ -44,9 +45,10 @@ function solve(start, end, rows, cols) {
   // fList[[11, 13]] = 19;
   // fList[[12, 13]] = 20;
 
-  let count = 0;
-  while (count > 0) {
-    count--;
+  // let count = 5;
+  while (open.length > 0 && !found) {
+    // while (count > 0) {
+    // count--;
     let cur = getLowest(open, fList); // retrieve the node with the lowest f-value
     let row = cur[0];
     let col = cur[1];
@@ -54,12 +56,14 @@ function solve(start, end, rows, cols) {
     let neighbors = adjacentNeighbor(row, col, rows, cols);
     closed[[row, col]] = true;
 
-    console.log("cur node: " + cur);
-    console.log("cur row: " + cur[0]);
-    console.log("cur col: " + cur[1]);
-    console.log("neighbors length: " + neighbors.length);
+    if (row !== start[0] || col !== start[1]) visitedOrder.push([row, col]);
 
-    // console.log(neighbors);
+    // console.log("cur node: " + cur);
+    // console.log("cur row: " + cur[0]);
+    // console.log("cur col: " + cur[1]);
+    // console.log("neighbors length: " + neighbors.length);
+
+    // console.log("neighbors: " + neighbors);
 
     // for each neighbor
     while (neighbors.length > 0) {
@@ -67,12 +71,13 @@ function solve(start, end, rows, cols) {
       let nRow = neighbor[0];
       let nCol = neighbor[1];
 
-      console.log("neighbor: " + neighbor);
+      // console.log("neighbor: " + neighbor);
 
       // if goal, stop
       if (nRow === end[0] && nCol === end[1]) {
         console.log("found");
         found = true;
+        shortestPath[[nRow, nCol]] = cur;
         break;
       }
 
@@ -109,9 +114,9 @@ function solve(start, end, rows, cols) {
     }
   }
 
-  console.log("open list: " + open);
+  // console.log("open list: " + open);
   // console.log("closed list: " + closed);
-  console.log(shortestPath);
+  // console.log(shortestPath);
 
   // for every node in open with lowest f cost:
   // calculate neighbor's g - distance from starting node
@@ -137,9 +142,9 @@ function getLowest(open, fList) {
   }
 
   // remove node from open list
-  let lowestNode = open.splice(index, 1);
+  let lowestNode = open.splice(index, 1)[0];
 
-  console.log("lowest node: " + lowestNode);
+  // console.log("lowest node: " + lowestNode);
 
   return lowestNode;
 }
