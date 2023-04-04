@@ -81,8 +81,6 @@ const Navbar = ({ selectAlgorithm, selectAnimation }) => {
                     >
                       Breadth First Search
                     </button>
-                  </li>
-                  <li>
                     <button
                       className="dropdown-item"
                       onClick={() => clickAlgorithm("DFS")}
@@ -94,6 +92,12 @@ const Navbar = ({ selectAlgorithm, selectAnimation }) => {
                       onClick={() => clickAlgorithm("Dijkstras")}
                     >
                       Dijkstra's (weighted)
+                    </button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => clickAlgorithm("A*")}
+                    >
+                      A* (weighted)
                     </button>
                   </li>
                 </ul>

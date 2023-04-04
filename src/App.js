@@ -6,6 +6,7 @@ import { DFS } from "./algorithms/DFS";
 import { Dijkstras } from "./algorithms/Dijkstras";
 import { animateBothPath, randomWeight } from "./algorithms/algoFunc";
 import Navbar from "./components/Navbar";
+import { AStar } from "./algorithms/AStar";
 
 function App() {
   const [wall, setWall] = useState(false);
@@ -13,10 +14,10 @@ function App() {
   const [curAnim, setAnim] = useState("");
 
   const grid = [];
-  const rows = 28;
+  const rows = 24;
   const cols = 80;
-  const start = [14, 15];
-  const end = [14, 65];
+  const start = [12, 15];
+  const end = [12, 65];
 
   // reset grid
   const clearGrid = () => {
@@ -95,6 +96,7 @@ function App() {
     if (curAlgo === "BFS") dict = BFS(start, end, rows, cols);
     else if (curAlgo === "DFS") dict = DFS(start, end, rows, cols);
     else if (curAlgo === "Dijkstras") dict = Dijkstras(start, end, rows, cols);
+    else if (curAlgo === "A*") dict = AStar(start, end, rows, cols);
 
     if (curAlgo !== "" && curAnim !== "")
       animateBothPath(
