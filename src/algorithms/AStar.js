@@ -39,10 +39,9 @@ function solve(start, end, rows, cols) {
     }
   }
 
-  open.push([start[0], start[1]]);
-  fList[[start[0], start[1]]][0] = 0;
-  fList[[start[0], start[1]]][1] =
-    Math.abs(start[0] - end[0]) + Math.abs(start[1] - end[1]); // initialize heuristics for getLowest()
+  open.push(start);
+  fList[start][0] = 0;
+  fList[start][1] = Math.abs(start[0] - end[0]) + Math.abs(start[1] - end[1]); // initialize heuristics for getLowest()
 
   // getLowest() test case - should return the node with lowest f-value
   // open.push([11, 13]);
@@ -59,9 +58,9 @@ function solve(start, end, rows, cols) {
     let col = cur[1];
 
     let neighbors = adjacentNeighbor(row, col, rows, cols);
-    closed[[row, col]] = true;
+    closed[cur] = true;
 
-    if (row !== start[0] || col !== start[1]) visitedOrder.push([row, col]);
+    if (row !== start[0] || col !== start[1]) visitedOrder.push(cur);
 
     // console.log("cur node: " + cur);
     // console.log("cur row: " + cur[0]);
@@ -87,10 +86,10 @@ function solve(start, end, rows, cols) {
       }
 
       // if visited, skip
-      if (closed[[nRow, nCol]] === true) continue;
+      if (closed[neighbor] === true) continue;
 
       // else, compute f value
-      let parentDist = fList[[row, col]][0]; // distance to parent
+      let parentDist = fList[cur][0]; // distance to parent
       let heuristics = Math.abs(nRow - end[0]) + Math.abs(nCol - end[1]); // estimated cost from end
 
       let fValue = parentDist + heuristics; // f-value of this neighbor
@@ -109,13 +108,13 @@ function solve(start, end, rows, cols) {
       if (!inOpen) {
         // add to open list and f-value list
         open.push(neighbor);
-        fList[[nRow, nCol]][0] = parentDist;
+        fList[[nRow, nCol]][0] = parentDist + nodeWeight(nRow, nCol);
         fList[[nRow, nCol]][1] = heuristics;
         shortestPath[[nRow, nCol]] = cur;
       } else {
         // check f-value and adjust f-value and parent if new f-value is lower
         if (fValue < fList[[nRow, nCol]][0] + fList[[nRow, nCol]][1]) {
-          fList[[nRow, nCol]][0] = parentDist;
+          fList[[nRow, nCol]][0] = parentDist + nodeWeight(nRow, nCol);
           fList[[nRow, nCol]][1] = heuristics;
           shortestPath[[nRow, nCol]] = cur;
         }
@@ -143,8 +142,8 @@ function getLowest(open, fList) {
   for (let i = 0; i < open.length; i++) {
     let node = open[i];
 
-    let parentDist = fList[[node[0], node[1]]][0];
-    let heuristics = fList[[node[0], node[1]]][1];
+    let parentDist = fList[node][0];
+    let heuristics = fList[node][1];
 
     let newValue = parentDist + heuristics;
 
