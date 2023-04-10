@@ -10,11 +10,11 @@ import { AStar } from "./algorithms/AStar";
 
 function App() {
   const [wall, setWall] = useState(false);
-  const [curAlgo, setAlgo] = useState("");
-  const [curAnim, setAnim] = useState("");
+  const [curAlgo, setAlgo] = useState("BFS");
+  const [curAnim, setAnim] = useState("Visited Path");
 
   const grid = [];
-  const rows = 24;
+  const rows = 25;
   const cols = 80;
   const start = [12, 15];
   const end = [12, 65];
@@ -50,6 +50,7 @@ function App() {
           document.getElementById(row + "-" + col).className = "cell empty";
       }
     }
+    setWall(false);
   };
 
   // when hovering and wall is enabled
@@ -151,10 +152,6 @@ function App() {
       <div className="container-fluid mt-5" style={{ fontSize: 0 }}>
         {grid}
       </div>
-
-      {/* <div className="gridContainer" id="grid-container">
-        {grid}
-      </div> */}
     </div>
   );
 }

@@ -5,6 +5,7 @@ let shortestPath = [];
 let found = false;
 
 export function AStar(start, end, rows, cols) {
+  // reset values
   visitedOrder = [];
   shortestPath = [];
   found = false;
@@ -57,7 +58,7 @@ function solve(start, end, rows, cols) {
       // if goal, stop
       if (nRow === end[0] && nCol === end[1]) {
         found = true;
-        shortestPath[[nRow, nCol]] = cur;
+        shortestPath[neighbor] = cur;
         break;
       }
 

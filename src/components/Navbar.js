@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 const Navbar = ({ selectAlgorithm, selectAnimation }) => {
-  const [navAlgorithm, setAlgorithm] = useState("Select Algorithm");
-  const [navAnimation, setAnimation] = useState("Select Animation");
+  const [navAlgorithm, setAlgorithm] = useState("Algorithm: BFS");
+  const [navAnimation, setAnimation] = useState("Animation: Visited Path");
 
   const clickAlgorithm = (algorithm) => {
     setAlgorithm("Algorithm: " + algorithm);
