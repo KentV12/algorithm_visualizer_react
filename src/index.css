@@ -40,7 +40,7 @@ body {
 
 .cell {
   /* 
-  outline better than border here or we will need to adjust width minus border px
+  adjusting outline is better than border here or we will need to adjust width minus border px
   border is needed since background color will overlap with outline, thus no outline 
   box-shadow is used due to border affecting overall size when scaling down resolution
   and background-color only leaving right side of outline when added

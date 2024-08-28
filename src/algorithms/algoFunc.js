@@ -1,4 +1,6 @@
 // returns available cells as neighbors that are unvisited or the destination cell
+export const timeoutIDs = [];
+
 export function adjacentNeighbor(row, col, rows, cols) {
   let neighbors = [];
 
@@ -83,10 +85,10 @@ export function animateBothPath(
 
     if (!isEnd(cell, end)) {
       // if not the last cell
-      setTimeout(() => {
+      timeoutIDs.push(setTimeout(() => {
         document.getElementById(cell[0] + "-" + cell[1]).className = className;
         // cellName + " visitedColor";
-      }, timePerGrid * count); // Multiplied by count means every 10ms this will be called
+      }, timePerGrid * count)); // Multiplied by count means every timePerGrid (in ms) this will be called
       count++;
     }
   }
@@ -102,17 +104,17 @@ export function animateBothPath(
       cur = shortestPath[[cur[0], cur[1]]];
     }
     pathArray.reverse();
-    setTimeout(() => {
+    timeoutIDs.push(setTimeout(() => {
       let count = 0;
       while (pathArray.length > 0) {
         let cur = pathArray.shift();
-        setTimeout(() => {
+        timeoutIDs.push(setTimeout(() => {
           document.getElementById(cur[0] + "-" + cur[1]).className =
             "cell path";
-        }, timePerGrid * count); // display shortest path in half the time of visiting cells
+        }, timePerGrid * count)); // display shortest path in half the time of visiting cells
         count++;
       }
-    }, timePerGrid * count + 1000);
+    }, timePerGrid * count + 1000));
   }
 }
 

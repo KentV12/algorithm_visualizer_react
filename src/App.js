@@ -7,6 +7,7 @@ import { Dijkstras } from "./algorithms/Dijkstras";
 import { animateBothPath, randomWeight } from "./algorithms/algoFunc";
 import Navbar from "./components/Navbar";
 import { AStar } from "./algorithms/AStar";
+import { timeoutIDs } from "./algorithms/algoFunc";
 
 function App() {
   const [wall, setWall] = useState(false);
@@ -16,8 +17,8 @@ function App() {
   const grid = [];
   const rows = 25;
   const cols = 80;
-  const start = [12, 15];
-  const end = [12, 65];
+  const start = [12, 15]; // starting node
+  const end = [12, 65]; // destination node
 
   // reset grid
   const clearGrid = () => {
@@ -46,11 +47,20 @@ function App() {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         let name = document.getElementById(row + "-" + col).className;
-        if (name === "cell wall")
+        if (name !== "cell start" && name !== "cell end") {
+          // clearTimeout(timeoutIDs[[row, col]]);
           document.getElementById(row + "-" + col).className = "cell empty";
+        }  
       }
     }
+
+    while(timeoutIDs.length > 0) {
+      clearTimeout(timeoutIDs.pop());
+    }
+
     setWall(false);
+
+
   };
 
   // when hovering and wall is enabled
