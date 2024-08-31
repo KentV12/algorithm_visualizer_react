@@ -20,20 +20,6 @@ function App() {
   const start = [12, 15]; // starting node
   const end = [12, 65]; // destination node
 
-  // reset grid
-  const clearGrid = () => {
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        let name = document.getElementById(row + "-" + col).className;
-        if (name !== "cell wall")
-          document.getElementById(row + "-" + col).className = "cell empty";
-      }
-    }
-
-    document.getElementById(start[0] + "-" + start[1]).className = "cell start";
-    document.getElementById(end[0] + "-" + end[1]).className = "cell end";
-  };
-
   // enable wall
   const onMouseClick = (id) => {
     setWall(!wall);
@@ -43,24 +29,21 @@ function App() {
       document.getElementById(id).className = "cell wall";
   };
 
-  const clearWall = () => {
+  const clearGrid = () => {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         let name = document.getElementById(row + "-" + col).className;
         if (name !== "cell start" && name !== "cell end") {
-          // clearTimeout(timeoutIDs[[row, col]]);
           document.getElementById(row + "-" + col).className = "cell empty";
-        }  
+        }
       }
     }
 
-    while(timeoutIDs.length > 0) {
+    while (timeoutIDs.length > 0) {
       clearTimeout(timeoutIDs.pop());
     }
 
     setWall(false);
-
-
   };
 
   // when hovering and wall is enabled
@@ -131,11 +114,11 @@ function App() {
         </div>
 
         <div className="col-md-4 mx-auto text-start mb-4">
+          <h5>1. Select algorithm and animation type in the top right menu</h5>
+          <h5>2. Add/Randomize weight (if supported by algorithm)</h5>
           <h5>
-            1. Select algorithm and animation type in the top right menu <br />
-            2. Add weight (if supported by algorithm) <br />
-            Adding <span style={{ color: "brown" }}>Wall</span>: click a node to
-            enable wall and hover to add. Click again to Stop.
+            Adding <span style={{ color: "brown" }}>Wall</span>: click any node
+            to enable wall and hover to add. Click again to Stop.
           </h5>
         </div>
 
@@ -151,11 +134,8 @@ function App() {
         >
           Randomize Weight
         </button>
-        <button className="btn btn-primary m-1" onClick={() => clearWall()}>
-          Clear Wall
-        </button>
         <button className="btn btn-primary m-1" onClick={() => clearGrid()}>
-          Clear Grid
+          Clear
         </button>
       </div>
 
