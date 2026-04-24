@@ -13,20 +13,27 @@ function App() {
   const [wall, setWall] = useState(false);
   const [curAlgo, setAlgo] = useState("BFS");
   const [curAnim, setAnim] = useState("Visited Path");
+  const [start, setStart] = useState([12, 15]);
+  const [end, setEnd] = useState([12, 65]);
+  const [moveStart, setMoveStart] = useState(false);
+  const [moveEnd, setMoveEnd] = useState(false);
 
-  const grid = [];
+  let grid = [];
   const rows = 25;
   const cols = 80;
-  const start = [12, 15]; // starting node
-  const end = [12, 65]; // destination node
 
   // enable wall
   const onMouseClick = (id) => {
-    setWall(!wall);
-
     const name = document.getElementById(id).className;
-    if (name !== "cell start" && name !== "cell end")
-      document.getElementById(id).className = "cell wall";
+    if (name !== "cell start" && name !== "cell end") {
+      setWall(!wall);
+      document.getElementById(id).className = "cell wall"; 
+    } else if (name === "cell start") {
+      console.log(!moveStart);
+      setMoveStart(!moveStart);
+    } else if (name === "cell end") {
+      setMoveEnd(!moveEnd);
+    }
   };
 
   const clearGrid = () => {
@@ -46,13 +53,34 @@ function App() {
     setWall(false);
   };
 
-  // when hovering and wall is enabled
+  // when hovering - changes node based on feature enabled
   const handleMouseDown = (id) => {
     const name = document.getElementById(id).className;
 
-    if (wall)
+    if (wall) {
       if (name !== "cell start" && name !== "cell end")
         document.getElementById(id).className = "cell wall";
+    }
+    
+    if (moveStart || moveEnd) {
+      // find row and column of current node
+      const node = document.getElementById(id).id;
+      const [rowStr, colStr] = node.split("-");
+      const row = parseInt(rowStr, 10);
+      const col = parseInt(colStr, 10);
+
+      // set current node to start/end
+      if (moveStart) {
+        document.getElementById(start[0] + "-" + start[1]).className = "cell empty";
+        document.getElementById(id).className = "cell start";
+        setStart([row, col]);
+      }
+      else if (moveEnd) {
+        document.getElementById(end[0] + "-" + end[1]).className = "cell empty";
+        document.getElementById(id).className = "cell end";
+        setEnd([row, col]);
+      }
+    }
   };
 
   // create grid
