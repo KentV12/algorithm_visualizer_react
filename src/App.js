@@ -1,6 +1,7 @@
 // import Grid from "./components/Grid";
 import { useState } from "react";
 import Cell from "./components/Cell";
+import Grid from "./components/Grid";
 import { BFS } from "./algorithms/BFS";
 import { DFS } from "./algorithms/DFS";
 import { Dijkstras } from "./algorithms/Dijkstras";
@@ -168,7 +169,8 @@ function App() {
       </div>
 
       <div className="container-fluid mt-5" style={{ fontSize: 0 }}>
-        {grid}
+        {/* {grid} */}
+        <Grid />
       </div>
     </div>
   );

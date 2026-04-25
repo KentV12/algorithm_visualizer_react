@@ -3,21 +3,25 @@ const Cell = ({
   isEnd,
   isWall,
   id,
-  handleMouseDown,
+  handleMouseHover,
   handleMouseClick,
+  handleMouseUp,
 }) => {
   let className = "cell empty";
 
+  if (isWall) className = "cell wall";
   if (isStart) className = "cell start";
   if (isEnd) className = "cell end";
-  if (isWall) className = "cell wall";
+  
 
   return (
     <div
       id={id}
       className={className}
-      onMouseOver={() => handleMouseDown(id)}
+      onMouseOver={() => handleMouseHover(id)}
       onMouseDown={() => handleMouseClick(id)}
+      onMouseUp={() => handleMouseUp()}
+      onDragStart={(e) => e.preventDefault()} // fix issue with browser dragging
     />
   );
 };
