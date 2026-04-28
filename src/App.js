@@ -1,107 +1,15 @@
 // import Grid from "./components/Grid";
 import { useState } from "react";
-import Cell from "./components/Cell";
 import Grid from "./components/Grid";
-import { BFS } from "./algorithms/BFS";
-import { DFS } from "./algorithms/DFS";
-import { Dijkstras } from "./algorithms/Dijkstras";
-import { animateBothPath, randomWeight } from "./algorithms/algoFunc";
 import Navbar from "./components/Navbar";
-import { AStar } from "./algorithms/AStar";
-import { timeoutIDs } from "./algorithms/algoFunc";
 
 function App() {
-  const [wall, setWall] = useState(false);
   const [curAlgo, setAlgo] = useState("BFS");
   const [curAnim, setAnim] = useState("Visited Path");
-  const [start, setStart] = useState([12, 15]);
-  const [end, setEnd] = useState([12, 65]);
-  const [moveStart, setMoveStart] = useState(false);
-  const [moveEnd, setMoveEnd] = useState(false);
 
-  let grid = [];
-  const rows = 25;
-  const cols = 80;
-
-  // enable wall
-  const onMouseClick = (id) => {
-    const name = document.getElementById(id).className;
-    if (name !== "cell start" && name !== "cell end") {
-      setWall(!wall);
-      document.getElementById(id).className = "cell wall"; 
-    } else if (name === "cell start") {
-      console.log(!moveStart);
-      setMoveStart(!moveStart);
-    } else if (name === "cell end") {
-      setMoveEnd(!moveEnd);
-    }
-  };
-
-  const clearGrid = () => {
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        let name = document.getElementById(row + "-" + col).className;
-        if (name !== "cell start" && name !== "cell end") {
-          document.getElementById(row + "-" + col).className = "cell empty";
-        }
-      }
-    }
-
-    while (timeoutIDs.length > 0) {
-      clearTimeout(timeoutIDs.pop());
-    }
-
-    setWall(false);
-  };
-
-  // when hovering - changes node based on feature enabled
-  const handleMouseDown = (id) => {
-    const name = document.getElementById(id).className;
-
-    if (wall) {
-      if (name !== "cell start" && name !== "cell end")
-        document.getElementById(id).className = "cell wall";
-    }
-    
-    if (moveStart || moveEnd) {
-      // find row and column of current node
-      const node = document.getElementById(id).id;
-      const [rowStr, colStr] = node.split("-");
-      const row = parseInt(rowStr, 10);
-      const col = parseInt(colStr, 10);
-
-      // set current node to start/end
-      if (moveStart) {
-        document.getElementById(start[0] + "-" + start[1]).className = "cell empty";
-        document.getElementById(id).className = "cell start";
-        setStart([row, col]);
-      }
-      else if (moveEnd) {
-        document.getElementById(end[0] + "-" + end[1]).className = "cell empty";
-        document.getElementById(id).className = "cell end";
-        setEnd([row, col]);
-      }
-    }
-  };
-
-  // create grid
-  for (let row = 0; row < rows; row++) {
-    for (let col = 0; col < cols; col++) {
-      const isStart = row === start[0] && col === start[1];
-      const isEnd = row === end[0] && col === end[1];
-      grid.push(
-        <Cell
-          id={`${row}-${col}`}
-          key={[row, col]}
-          isStart={isStart}
-          isEnd={isEnd}
-          isWall={false}
-          handleMouseDown={handleMouseDown}
-          handleMouseClick={onMouseClick}
-        />
-      );
-    }
-  }
+  const [animationSignal, setAnimationSignal] = useState(0);
+  const [clearSignal, setClearSignal] = useState(0);
+  const [randomWeightSignal, setRandomWeightSignal] = useState(0);
 
   // choose animation
   const selectAnimation = (selectedAnim) => {
@@ -111,24 +19,6 @@ function App() {
   // choose algorithm
   const selectAlgorithm = (selectedAlgo) => {
     setAlgo(selectedAlgo);
-  };
-
-  const performAlgorithm = () => {
-    let dict = null;
-
-    if (curAlgo === "BFS") dict = BFS(start, end, rows, cols);
-    else if (curAlgo === "DFS") dict = DFS(start, end, rows, cols);
-    else if (curAlgo === "Dijkstras") dict = Dijkstras(start, end, rows, cols);
-    else if (curAlgo === "A*") dict = AStar(start, end, rows, cols);
-
-    if (curAlgo !== "" && curAnim !== "")
-      animateBothPath(
-        end,
-        dict["found"],
-        dict["visitedOrder"],
-        dict["shortestPath"],
-        curAnim
-      );
   };
 
   return (
@@ -152,25 +42,32 @@ function App() {
         </div>
 
         <button
-          onClick={() => performAlgorithm()}
           className="btn btn-success m-1"
+          onClick={() => setAnimationSignal((n) => n + 1)}
         >
           Visualize
         </button>
         <button
           className="btn btn-success m-1"
-          onClick={() => randomWeight(rows, cols)}
+          onClick={() => setRandomWeightSignal((n) => n + 1)}
         >
           Randomize Weight
         </button>
-        <button className="btn btn-primary m-1" onClick={() => clearGrid()}>
+        <button 
+          className="btn btn-primary m-1" 
+          onClick={() => setClearSignal((n) => n + 1)}>
           Clear
         </button>
       </div>
 
       <div className="container-fluid mt-5" style={{ fontSize: 0 }}>
-        {/* {grid} */}
-        <Grid />
+        <Grid 
+          curAlgo={curAlgo} 
+          curAnim={curAnim}
+          animationSignal={animationSignal}
+          clearSignal={clearSignal}
+          randomWeightSignal={randomWeightSignal}
+        />
       </div>
     </div>
   );

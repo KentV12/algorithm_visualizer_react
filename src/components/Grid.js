@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cell from "./Cell";
 import { timeoutIDs } from "../algorithms/algoFunc";
+import { DFS } from "../algorithms/DFS";
+import { BFS } from "../algorithms/BFS";
+import { Dijkstras } from "../algorithms/Dijkstras";
+import { AStar } from "../algorithms/AStar";
+import { animateBothPath, randomWeight } from "../algorithms/algoFunc";
 
 const rows = 25;
 const cols = 80;
@@ -25,7 +30,13 @@ const createInitialGrid = () => {
   return newGrid;
 };
 
-const Grid = (curAlgo, performAlgorithm) => {
+const Grid = ({
+  curAlgo, 
+  curAnim,
+  animationSignal,
+  clearSignal,
+  randomWeightSignal,
+}) => {
   const [grid, setGrid] = useState(createInitialGrid());
   const [start, setStart] = useState([12, 15]);
   const [end, setEnd] = useState([12, 65]);
@@ -85,6 +96,19 @@ const Grid = (curAlgo, performAlgorithm) => {
   }
 
   const clearGrid = () => {
+    while (timeoutIDs.length > 0) {
+      clearTimeout(timeoutIDs.pop());
+    }
+
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        let name = document.getElementById(row + "-" + col).className;
+        if (name !== "cell start" && name !== "cell end") {
+          document.getElementById(row + "-" + col).className = "cell empty";
+        }
+      }
+    }
+
     setGrid((prevGrid) =>
       prevGrid.map((row) =>
         row.map((cell) => ({
@@ -94,9 +118,8 @@ const Grid = (curAlgo, performAlgorithm) => {
       )
     );
 
-    while (timeoutIDs.length > 0) {
-      clearTimeout(timeoutIDs.pop());
-    }
+    setMousePressed(false);
+    setDrag(null);
   };
 
   const setWallAt = (row, col, value) => {
@@ -110,6 +133,42 @@ const Grid = (curAlgo, performAlgorithm) => {
       )
     );
   };
+
+  const performAlgorithm = () => {
+    let dict = null;
+    
+    if (curAlgo === "BFS") dict = BFS(start, end, rows, cols);
+    else if (curAlgo === "DFS") dict = DFS(start, end, rows, cols);
+    else if (curAlgo === "Dijkstras") dict = Dijkstras(start, end, rows, cols);
+    else if (curAlgo === "A*") dict = AStar(start, end, rows, cols);
+
+    if (curAlgo !== "" && curAnim !== "")
+      animateBothPath(
+        end,
+        dict["found"],
+        dict["visitedOrder"],
+        dict["shortestPath"],
+        curAnim
+      );
+  };
+
+  useEffect(() => {
+    if (animationSignal === 0) return;
+    console.log("animationSignal: " + animationSignal);
+    performAlgorithm();
+  }, [animationSignal]);
+
+  useEffect(() => {
+    if (clearSignal === 0) return;
+    console.log("clearSignal: " + clearSignal);
+    clearGrid();
+  }, [clearSignal]);
+
+  useEffect(() => {
+    if (randomWeightSignal === 0) return;
+    console.log("randomWeightSignal: " + randomWeightSignal);
+    randomWeight(rows, cols);
+  }, [randomWeightSignal]);
 
   return (
     <div>
