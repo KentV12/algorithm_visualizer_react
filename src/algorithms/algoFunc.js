@@ -1,6 +1,4 @@
 // returns available cells as neighbors that are unvisited or the destination cell
-export const timeoutIDs = [];
-
 export function adjacentNeighbor(row, col, rows, cols) {
   let neighbors = [];
 
@@ -64,80 +62,8 @@ export function validNeighbor(name) {
   else return false;
 }
 
-export function animateBothPath(
-  end,
-  found,
-  visitedOrder,
-  shortestPath,
-  animationType
-) {
-  const timePerGrid = 25;
-  let count = 0;
-
-  while (visitedOrder.length > 0) {
-    let cell = visitedOrder.shift();
-    let className = "";
-
-    let cellName = document.getElementById(cell[0] + "-" + cell[1]).className;
-
-    if (animationType === "Visited Path") className = "cell visitedPath";
-    if (animationType === "Outer Scan") className = cellName + " outerScan";
-
-    if (!isEnd(cell, end)) {
-      // if not the last cell
-      timeoutIDs.push(setTimeout(() => {
-        document.getElementById(cell[0] + "-" + cell[1]).className = className;
-        // cellName + " visitedColor";
-      }, timePerGrid * count)); // Multiplied by count means every timePerGrid (in ms) this will be called
-      count++;
-    }
-  }
-
-  let cur = shortestPath[[end[0], end[1]]];
-  let pathArray = [];
-
-  // if end cell is found
-  if (found) {
-    // while the parent cell of current cell is not the start
-    while (shortestPath[[cur[0], cur[1]]] !== "start") {
-      pathArray.push([cur[0], cur[1]]);
-      cur = shortestPath[[cur[0], cur[1]]];
-    }
-    pathArray.reverse();
-    timeoutIDs.push(setTimeout(() => {
-      let count = 0;
-      while (pathArray.length > 0) {
-        let cur = pathArray.shift();
-        timeoutIDs.push(setTimeout(() => {
-          document.getElementById(cur[0] + "-" + cur[1]).className =
-            "cell path";
-        }, timePerGrid * count)); // display shortest path in half the time of visiting cells
-        count++;
-      }
-    }, timePerGrid * count + 1000));
-  }
-}
-
-export function randomWeight(rows, cols) {
-  for (let row = 0; row < rows; row++) {
-    for (let col = 0; col < cols; col++) {
-      let name = document.getElementById(row + "-" + col).className;
-      if (
-        name === "cell empty" ||
-        name === "cell weight1" ||
-        name === "cell weight2" ||
-        name === "cell weight3"
-      ) {
-        let weight = Math.floor(Math.random() * 3) + 1;
-        document.getElementById(row + "-" + col).className =
-          "cell weight" + weight;
-      }
-    }
-  }
-}
-
 // return if cell is the end cell
-function isEnd(cell, endCell) {
+export function isEnd(cell, endCell) {
   let isEnd = false;
 
   if (cell[0] === endCell[0] && cell[1] === endCell[1]) {
