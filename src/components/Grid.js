@@ -226,7 +226,7 @@ const Grid = ({
           const isStartCell = start[0] === rowIndex && start[1] === colIndex;
           const isEndCell = end[0] === rowIndex && end[1] === colIndex;
 
-          if (isStartCell || isEndCell || cell.isWall) {
+          if (cell.isWall) {
             return cell;
           }
 
