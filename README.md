@@ -25,4 +25,4 @@ Steps to run this project:
 
 ## 💡 Preview
 
-<video src="./public/preview.mkv" width="320" height="240" controls></video>
+https://github.com/user-attachments/assets/e55f2fe9-ec2c-4019-8e99-2b9a5f82ed5c
