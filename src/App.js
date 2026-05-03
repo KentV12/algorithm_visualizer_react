@@ -35,10 +35,7 @@ function App() {
         <div className="col-md-4 mx-auto text-start mb-4">
           <h5>1. Select algorithm and animation type in the top right menu</h5>
           <h5>2. Add/Randomize weight (if supported by algorithm)</h5>
-          <h5>
-            Adding <span style={{ color: "brown" }}>Wall</span>: click any node
-            to enable wall and hover to add. Click again to Stop.
-          </h5>
+          <h5>3. Click and drag endpoints to move or non-endpoints to add wall.</h5>
         </div>
 
         <button
