@@ -1,6 +1,6 @@
-# 🗺️ Algorithm Visualizer
+# 🗺️ Pathfinding Algorithm Visualizer
 
-A pathfinding algorithm visualizer built using React. This project was built for learning purposes; I focused on learning react and implementing a front-end that looks visually appealing.
+A pathfinding algorithm visualizer built using React. This project was built for learning purposes; I mainly focused on learning React itself and implementing its features to my program for a responsive front-end.
 
 ## 📫 Technologies
 
@@ -20,7 +20,7 @@ What you can do in this program:
 
 Steps to run this project:
 1. Clone this repository
-2. Run `npm install` to install the required depedencies
+2. Run `npm install` to install the required dependencies
 3. Run `npm start` to start the program on your localhost
 
 ## 💡 Preview
